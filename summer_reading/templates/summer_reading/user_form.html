@@ -1,0 +1,34 @@
+<HTML>
+    <head>
+        <title>User Sign Up</title>
+    </head>
+    <body>
+        <div>
+            <div><h4>Summer Reading User Sign Up</h4></div>
+            <div>
+                <form id="new_user_form" method="post" novalidate>
+                    {% csrf_token %}
+                    <div>
+                        <div>Contact Information</div>
+                        <div>
+                            {% if form_errors %}
+                                <div>
+                                    <div>
+                                        <div>
+                                            <ul>
+                                                {% for field, errors in form_errors %}
+                                                    <li><strong>{{ field }}</strong>{% for error in errors %} - {{ error }}{% endfor %}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {{ form }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</HTML>
