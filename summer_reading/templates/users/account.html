@@ -5,7 +5,7 @@
 	</title>
     </head>
     <body>
-    	<a href="{% url auth_logout %}">Log Out</a>
+    	<a href="{% url 'auth_logout' %}">Log Out</a>
         <p>{{ user.first_name }}</p>
 	<p>{{ user.last_name }}</p>
     </body>

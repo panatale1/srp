@@ -28,8 +28,11 @@ class UserRegisterView(CreateView):
 
     def form_valid(self, form):
         response = super(UserRegisterView, self).form_valid(form)
-        prelim_user = self.object
-        user = authenticate(self.request, prelim_user.username, form.cleaned_data['password'])
+        user = self.object
+        import pdb; pdb.set_trace()
+        authenticate(username=user.username, password=form.cleaned_data['password'])
+        user.set_password(form.cleaned_data['password'])
+        user.save()
         login(self.request, user)
         return response
 

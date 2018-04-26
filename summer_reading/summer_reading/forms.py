@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import django_superform
 from phonenumber_field.formfields import PhoneNumberField
 
 from django import forms
@@ -14,14 +15,13 @@ class ReviewForm(forms.ModelForm):
         fields = ['author', 'title', 'review', 'make_public']
 
 
-class SignUpForm(forms.ModelForm):
+class SignUpForm(django_superform.SuperModelForm):
     username = forms.CharField(max_length=50)
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
     school = forms.CharField(max_length=64)
     age = forms.IntegerField()
     next_grade = forms.IntegerField()
-    phone = PhoneNumberField()
     email = forms.EmailField()
     password = forms.CharField(
         widget=forms.PasswordInput(
