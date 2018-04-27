@@ -9,7 +9,7 @@ from django.db import models
 class User(AbstractUser):
     school = models.CharField(max_length=64, blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
-    next_grade = models.IntegerField(blank=True, null=True)
+    next_grade = models.CharField(max_length=7, blank=True, null=True)
     phone = PhoneNumberField(blank=True, null=True)
 
     def __unicode__(self):

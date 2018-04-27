@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'summer_reading',
+    'phonenumber_field',
+    'intl_tel_input',
 ]
 
 MIDDLEWARE = [

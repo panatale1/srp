@@ -1,6 +1,7 @@
 <HTML>
     <head>
         <title>User Sign Up</title>
+        {{ form.media.css }}
     </head>
     <body>
     <div align="right"><a href="{% url 'auth_login' %}">Log In</a></div>
@@ -32,5 +33,7 @@
                 </form>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {{ form.media.js }}
     </body>
 </HTML>

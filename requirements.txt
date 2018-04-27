@@ -6,6 +6,7 @@ django-appconf==1.0.2
 django-bootstrap-toolkit==2.15.0
 django-compressor==2.1.1
 django-extensions==1.7.8
+django-intl-tel-input
 django-localflavor
 django-phonenumber-field
 django-selectable==1.0.0
