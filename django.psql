@@ -1,4 +1,4 @@
-CREATE DATABASE summer_reading;
+CREATE DATABASE summer_reading_2;
 CREATE USER python WITH PASSWORD 'Python';
 ALTER ROLE python SET client_encoding TO 'utf8';
 ALTER ROLE python SET default_transaction_isolation TO 'read committed';

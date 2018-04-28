@@ -1,0 +1,12 @@
+<HTML>
+    <head>
+        <title>User Log In</title>
+    </head>
+    <body>
+        <form id="login_form" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button form="login_form" type="submit">Log In</button>
+        </form>
+    </body>
+</HTML>

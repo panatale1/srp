@@ -10,6 +10,7 @@ django-intl-tel-input
 django-localflavor
 django-phonenumber-field
 django-selectable==1.0.0
+django-superform
 enum34==1.1.6
 ipython==5.3.0
 ipython-genutils==0.2.0

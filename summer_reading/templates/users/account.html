@@ -5,8 +5,17 @@
 	</title>
     </head>
     <body>
-    	<a href="{% url 'auth_logout' %}">Log Out</a>
-        <p>{{ user.first_name }}</p>
-	<p>{{ user.last_name }}</p>
+    <p align="right"><a href="{% url 'auth_logout' %}">Log Out</a></p>
+        <div>
+            <div><h4>Your reviews:</h4></div>
+            <div>
+                {% for review in reviews %}
+                    <p><a href="{% url 'review' review.id %}">{{ review.title }} by {{ review.author }}</a></p>
+                {% endfor %}
+            </div>
+            <div>
+                <p><a href="{% url 'add-review' %}">Add a new review</a></p>
+            </div>
+        </div>
     </body>
 </head>

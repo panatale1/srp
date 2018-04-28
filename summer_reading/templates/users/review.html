@@ -1,0 +1,14 @@
+<HTML>
+    <head>
+        <title>Review of {{ review.title }} from {{ user.first_name }} {{ user.last_name }}</title>
+    </head>
+    <body>
+        <div><p align="right"><a href="{% url 'auth_logout' %}">Log Out</a></p></div>
+        <div>
+            <p>Title: {{ review.title }}</p>
+            <p>Author: {{ review.author }}<p>
+            <p>Review: {{ review.review }}</p>
+            <p>Is this review public: {% if review.make_public %} Yes {% else %} No {% endif %}</p>
+        </div>
+    </body>
+</HTML>

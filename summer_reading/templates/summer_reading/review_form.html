@@ -1,0 +1,12 @@
+<HTML>
+    <head>
+        <title>Add Review</title>
+    </head>
+    <body>
+        <form id="add_review" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><button form="add_review" type="submit">Submit Review</button></p>
+        </form>
+    </body>
+</HTML>

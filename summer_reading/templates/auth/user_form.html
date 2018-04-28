@@ -26,7 +26,11 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            {{ form }}
+                            {{ form.as_p }}
+                            <p>{{ form.profile.phone.label }}:{{ form.profile.phone }}</p>
+                            <p>{{ form.profile.school.label }}:{{ form.profile.school }}</p>
+                            <p>{{ form.profile.next_grade.label }}:{{ form.profile.next_grade }}</p>
+                            <p>{{ form.profile.age.label }}:{{ form.profile.age }}</p>
 			    <button form="new_user_form" type="submit">Sign up</button>
                         </div>
                     </div>
