@@ -1,0 +1,36 @@
+<HTML>
+    <head>
+        <title>Summer Reading Homepage</title>
+    </head>
+    <body>
+        <div>
+            <p align="right">
+                    <a href="{% url 'user-registration' %}">Sign Up</a>
+                    <a href="{% url 'auth_login' %}">Log In</a>
+            </p>
+        </div>
+        <div>
+            <p><h4>Recent Announcements</h4></p>
+            {% for announcement in announcements %}
+                <div>
+                    <p>{{ announcement.announcement }}</p>
+                </div>
+                {% if not forloop.last %}
+                    <hr/>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <p><h4>Recent Reviews:</h4></p>
+            {% for review in reviews %}
+                <div>
+                    <p>{{ review.title }} by {{ review.author }}</p>
+                    <p>{{ review.review }}</p>
+                </div>
+                {% if not forloop.last %}
+                    <hr/>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+</HTML>

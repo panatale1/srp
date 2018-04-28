@@ -17,13 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from .views import UserRegisterView, UserAccountView, CreateReview, ReviewView
+from .views import (UserRegisterView, UserAccountView, CreateReview, ReviewView, HomeView)
 
 urlpatterns = [
+    url(r'^$', HomeView.as_view(), name='home-page'),
     url(r'^admin/', admin.site.urls),
     url(r'^users/login/$', auth_views.LoginView.as_view() , name='auth_login'),
     url(r'^users/logout/$', auth_views.LogoutView.as_view(), name='auth_logout'),
-    url(r'^users/signup/$', UserRegisterView.as_view(), name='user_registration'),
+    url(r'^users/signup/$', UserRegisterView.as_view(), name='user-registration'),
     url(r'^users/account/$', UserAccountView.as_view(), name='user-account'),
     url(r'^add_review', CreateReview.as_view(), name='add-review'),
     url(r'^users/review/(?P<review_id>\d+)/$', ReviewView.as_view(), name='review'),

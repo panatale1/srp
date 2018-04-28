@@ -6,7 +6,7 @@ from django import forms
 from django.views.generic import TemplateView, FormView, CreateView
 
 from .forms import SignUpForm, ReviewForm
-from .models import Review, User
+from .models import Review, User, Announcement
 
 
 class SelectWinnersView(TemplateView):
@@ -75,4 +75,19 @@ class ReviewView(TemplateView):
         review = Review.objects.get(pk=review_id)
         context = self.get_context_data(**kwargs)
         context.update({'review': review})
+        return self.render_to_response(context)
+
+
+class HomeView(TemplateView):
+    template_name = 'summer_reading/home.html'
+
+    def get(self, request, *args, **kwargs):
+        reviews = Review.objects.filter(make_public=True).order_by('-created')
+        if reviews.count() > 10:
+            reviews = reviews[:10]
+        announcements = Announcement.objects.order_by('-created')
+        if announcements.count() > 10:
+            announcements = announcements[:10]
+        context = self.get_context_data(**kwargs)
+        context.update({'reviews': reviews, 'announcements': announcements})
         return self.render_to_response(context)

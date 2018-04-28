@@ -12,6 +12,8 @@ class UserProfile(models.Model):
     age = models.IntegerField(blank=True, null=True)
     next_grade = models.CharField(max_length=7, blank=True, null=True)
     phone = PhoneNumberField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return 'Profile for {0} {1}'.format(self.user.first_name, self.user.last_name)
@@ -23,7 +25,21 @@ class Review(models.Model):
     review = models.TextField()
     make_public = models.NullBooleanField()
     user = models.ForeignKey(User, related_name='reviews')
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return '{0} from {1} {2}'.format(self.title, self.user.first_name, self.user.last_name)
+
+
+class Announcement(models.Model):
+    title = models.CharField(max_length=64, null=True, blank=True)
+    announcement = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(
+        User, related_name='announcements',
+        limit_choices_to={'is_staff': True, 'is_superuser': True})
+
+    def __unicode__(self):
+        return '{0} by {1} {2}'.format(self.title, self.author.first_name, self.author.last_name)
