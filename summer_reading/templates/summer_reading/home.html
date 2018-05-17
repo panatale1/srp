@@ -1,36 +1,50 @@
+{% load staticfiles %}
 <HTML>
     <head>
         <title>Summer Reading Homepage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
-        <div>
-            <p align="right">
-                    <a href="{% url 'user-registration' %}">Sign Up</a>
-                    <a href="{% url 'auth_login' %}">Log In</a>
-            </p>
-        </div>
-        <div>
-            <p><h4>Recent Announcements</h4></p>
-            {% for announcement in announcements %}
-                <div>
-                    <p>{{ announcement.announcement }}</p>
+        <header class="container">
+            <div class="row">
+                <div class="col-sm-10"><h2>Greenburgh Public Library Summer Reading Program</h2></div>
+                <nav id="home_nav" class="text-right">
+                        <p class="col-sm-1"><a href="{% url 'user-registration' %}" class="btn btn-primary">Sign Up</a></p>
+                        <p class="col-sm-1"><a href="{% url 'auth_login' %}" class="btn btn-primary">Log In</a></p>
+                </nav>
+            </div>
+        </header>
+        <section class="jumbotron">
+            <div class="row text-center">
+                <h1>Your local Summer Reading Program starts here!</h1>
+            </div>
+        </section>
+        <section class="container">
+            <div class="row">
+                <div class="col-sm-6 text-left">
+                    <h3>Recent Announcements:</h4>
+                    {% for announcement in announcements %}
+                        <h4>{{ announcement.title }}</h4>
+                        <p>posted by {{ announcement.name }}</p>
+                        <p>{{ announcement.announcement }}</p>
+                        {% if not forloop.last %}
+                            <hr/>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% if not forloop.last %}
-                    <hr/>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div>
-            <p><h4>Recent Reviews:</h4></p>
-            {% for review in reviews %}
-                <div>
-                    <p>{{ review.title }} by {{ review.author }}</p>
-                    <p>{{ review.review }}</p>
+                <div class="col-sm-6 text-left">
+                    <h4>Recent Reviews:</h4>
+                    {% for review in reviews %}
+                        <p>{{ review.title }}<p>
+                        <p>by {{ review.author }}</p>
+                        <p>{{ review.review }}</p>
+                        {% if not forloop.last %}
+                            <hr/>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                {% if not forloop.last %}
-                    <hr/>
-                {% endif %}
-            {% endfor %}
-        </div>
+            </div>
+        </section>
     </body>
 </HTML>

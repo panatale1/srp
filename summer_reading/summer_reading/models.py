@@ -43,3 +43,7 @@ class Announcement(models.Model):
 
     def __unicode__(self):
         return '{0} by {1} {2}'.format(self.title, self.author.first_name, self.author.last_name)
+
+    @property
+    def name(self):
+        return '{0} {1}'.format(self.author.first_name, self.author.last_name)
