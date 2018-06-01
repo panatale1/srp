@@ -25,7 +25,7 @@ SECRET_KEY = '^oo*r-u0w8y=e8u$!q_jiu_1xt_lszo7i$lgf7#3^gk6730rsh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'intl_tel_input',
     'django_superform',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '../static'
+STATIC_ROOT = '{}/static/'.format(BASE_DIR)
 LOGIN_REDIRECT_URL = '/users/account/'
 LOGOUT_REDIRECT_URL = '/users/login/'

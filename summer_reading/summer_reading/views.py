@@ -1,8 +1,11 @@
 from random import choice, shuffle
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.core.urlresolvers import reverse
 from django import forms
+from django.http import Http404
 from django.views.generic import TemplateView, FormView, CreateView
 
 from .forms import SignUpForm, ReviewForm
@@ -40,9 +43,10 @@ class UserRegisterView(CreateView):
         return reverse('user-account')
 
 
-class UserAccountView(TemplateView):
+class UserAccountView(LoginRequiredMixin, TemplateView):
     template_name = 'users/account.html'
     form_class = ReviewForm
+    login_url = '/users/login/'
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
@@ -50,10 +54,12 @@ class UserAccountView(TemplateView):
         context.update({'reviews': reviews})
         return self.render_to_response(context)
 
-class CreateReview(CreateView):
+
+class CreateReview(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewForm
     success_url = '/users/account/'
+    login_url = '/users/login/'
 
     def get_form(self, form_class=None):
         if not form_class:
@@ -67,12 +73,16 @@ class CreateReview(CreateView):
         return super(CreateReview, self).form_valid(form)
 
 
-class ReviewView(TemplateView):
+class ReviewView(LoginRequiredMixin, TemplateView):
     template_name = 'users/review.html'
+    login_url = '/users/login/'
 
     def get(self, request, *args, **kwargs):
         review_id = kwargs.pop('review_id')
-        review = Review.objects.get(pk=review_id)
+        try:
+            review = Review.objects.get(pk=review_id, user=request.user)
+        except Review.DoesNotExist:
+            raise Http404
         context = self.get_context_data(**kwargs)
         context.update({'review': review})
         return self.render_to_response(context)

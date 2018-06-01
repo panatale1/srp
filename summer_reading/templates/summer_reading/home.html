@@ -1,40 +1,59 @@
+{% load static %}
 {% load staticfiles %}
 <HTML>
     <head>
-        <title>Summer Reading Homepage</title>
+        <title>Summer Reading Challenge Homepage</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
         <header class="container">
             <div class="row">
-                <div class="col-sm-10"><h2>Greenburgh Public Library Summer Reading Program</h2></div>
+                    <div class="{% if user.is_authenticated %}col-sm-9{% else %}col-sm-10{% endif %}"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
                 <nav id="home_nav" class="text-right">
-                        <p class="col-sm-1"><a href="{% url 'user-registration' %}" class="btn btn-primary">Sign Up</a></p>
-                        <p class="col-sm-1"><a href="{% url 'auth_login' %}" class="btn btn-primary">Log In</a></p>
+                        {% if user.is_authenticated %}
+                            <p class="col-sm-1 text-right">Hi, {{ user.first_name }}!</p>
+                            <p class="col-sm-2 text-left"><a href="{% url 'user-account' %}">My Account</a> | <a href="{% url 'auth_logout' %}">Log Out</a></p>
+                        {% else %}
+                            <p class="col-sm-1"><a href="{% url 'user-registration' %}" class="btn btn-primary">Sign Up</a></p>
+                            <p class="col-sm-1"><a href="{% url 'auth_login' %}" class="btn btn-primary">Log In</a></p>
+                        {% endif %}
                 </nav>
             </div>
         </header>
         <section class="jumbotron">
             <div class="row text-center">
-                <h1>Your local Summer Reading Program starts here!</h1>
+                    <h1>Your Summer Reading Challenge<br/>Starts Here!</h1>
             </div>
         </section>
         <section class="container">
             <div class="row">
-                <div class="col-sm-6 text-left">
+                <div id="rules" class="col-sm-4 text-left">
+                    <h3><strong>HOW TO PLAY:</strong></h3>
+                    <ol>
+                        <li><p><strong>Register</strong></p></li>
+                        <li><p>Read</p></li>
+                        <li><p>Write Reviews</p</li>
+                        <li><p>3 Or More Books</p></li>
+                        <li><p>Earn Raffle Tickets</p></li>
+                    </ol>
+                    <div class="text-center"><h3><strong>** WIN A TABLET **</strong></h3></div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div id="announcements" class="col-sm-3 text-left">
                     <h3>Recent Announcements:</h4>
                     {% for announcement in announcements %}
                         <h4>{{ announcement.title }}</h4>
                         <p>posted by {{ announcement.name }}</p>
-                        <p>{{ announcement.announcement }}</p>
+                        <p>{{ announcement.announcement|safe }}</p>
                         {% if not forloop.last %}
                             <hr/>
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="col-sm-6 text-left">
-                    <h4>Recent Reviews:</h4>
+                <div class="col-sm-1"></div>
+                <div id="homepage_reviews" class="col-sm-3 text-left">
+                    <h3>Recent Reviews:</h3>
                     {% for review in reviews %}
                         <p>{{ review.title }}<p>
                         <p>by {{ review.author }}</p>

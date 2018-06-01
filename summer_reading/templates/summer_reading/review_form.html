@@ -1,12 +1,32 @@
+{% load static %}
+{% load staticfiles %}
 <HTML>
     <head>
         <title>Add Review</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
-        <form id="add_review" method="POST" novalidate>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p><button form="add_review" type="submit">Submit Review</button></p>
-        </form>
+        <header class="container">
+            <div class="row">
+                <div class="col-sm-9"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+                <nav class="text-right">
+                    <p class="col-sm-1">Hi, {{ user.first_name }}!</p>
+                    <p class="col-sm-2 text-left"><a href="{% url 'user-account' %}">My Account</a></p>
+                </nav>
+            </div>
+        </header>
+        <section class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <form id="add_review" method="POST" novalidate>
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.as_p }}
+                        <p><button form="add_review" type="submit" class='btn btn-primary'>Submit Review</button></p>
+                    </form>
+                </div>
+            </div>
+        </section>
     </body>
 </HTML>

@@ -15,6 +15,41 @@ header {
     //background-color: #FFAF71;
 }
 
-#home_nav {
-    padding-top: 15px;
+nav {
+    padding-top: 25px;
 }
+
+#announcements {
+    border: 2px solid #70A1EB;
+}
+
+#homepage_reviews {
+    border: 2px solid #70A1EB;
+}
+
+#rules {
+    background-color: #70A1EB;
+    color: white;
+}
+jumbotron {
+    padding: 10px;
+}
+
+.errorlist {
+    padding: 20px;
+    background-color: #f44336;
+    margin-bottom: 15px;
+    color: white;
+}
+
+#account_reviews {
+    padding-top: 20px;
+}
+
+#add_review {
+    padding-top: 50px;
+}
+
+thead {
+    background-color: #70A1EB;
+    color: white;

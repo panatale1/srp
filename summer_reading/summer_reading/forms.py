@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from ckeditor.widgets import CKEditorWidget
 import django_superform
 from intl_tel_input.widgets import IntlTelInputWidget
 from phonenumber_field.formfields import PhoneNumberField
@@ -13,6 +14,7 @@ from .models import Review, UserProfile
 
 
 class ReviewForm(forms.ModelForm):
+    review = forms.CharField(widget=CKEditorWidget())
     make_public = forms.BooleanField(
         widget=forms.CheckboxInput(), initial=True, required=False)
 
@@ -39,14 +41,14 @@ class UserProfileForm(forms.ModelForm):
         ('12', '12'),
         ('College', 'College'),
     )
-    school = forms.CharField(max_length=64)
     age = forms.IntegerField()
     phone = forms.CharField(widget=IntlTelInputWidget(allow_dropdown=False))
     next_grade = forms.ChoiceField(choices=GRADE_CHOICES, initial='6')
+    other_school = forms.CharField(required=False)
 
     class Meta:
         model = UserProfile
-        fields = ['school', 'age', 'phone', 'next_grade']
+        fields = ['school', 'age', 'phone', 'next_grade', 'other_school']
      
 
 class UserProfileField(django_superform.ModelFormField):

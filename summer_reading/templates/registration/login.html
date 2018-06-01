@@ -1,12 +1,30 @@
+{% load static %}
+{% load staticfiles %}
 <HTML>
     <head>
-        <title>User Log In</title>
+        <title>Summer Reading Log In</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
-        <form id="login_form" method="POST" novalidate>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button form="login_form" type="submit">Log In</button>
-        </form>
+        <header class="container">
+             <div class="row">
+                 <div class="col-sm-10"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+                 <nav class="text-right">
+                     <p class="col-sm-1"><a href="{% url 'home-page' %}" class='btn btn-primary'>Home</a></p>
+                     <p class="col-sm-1"><a href="{% url 'user-registration' %}" class='btn btn-primary'>Sign Up</a></p>
+                 </nav>
+             </div>
+         </header>
+         <section class="container">
+            <div class="row">
+                <h4>Summer Reading Challenge Log In</h4>
+                <form id="login_form" method="POST" novalidate>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button form="login_form" type="submit" class="btn btn-primary">Log In</button>
+                </form>
+            </div>
+        </section>
     </body>
 </HTML>

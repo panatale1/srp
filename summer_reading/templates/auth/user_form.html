@@ -1,18 +1,29 @@
+{% load static %}
+{% load staticfiles %}
 <HTML>
     <head>
         <title>User Sign Up</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
         {{ form.media.css }}
     </head>
     <body>
-    <div align="left"><a href="{% url 'home-page' %}">Home</a></div>
-    <div align="right"><a href="{% url 'auth_login' %}">Log In</a></div>
-        <div>
-            <div><h4>Summer Reading User Sign Up</h4></div>
+    <header class="container">
+        <div class="row">
+                <div class="col-sm-10"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+            <nav class="text-right">
+                <p class="col-sm-1"><a href="{% url 'home-page' %}" class='btn btn-primary'>Home</a></p>
+                <p class="col-sm-1"><a href="{% url 'auth_login' %}" class='btn btn-primary'>Log In</a></p>
+            </nav>
+        </div>
+    </header>
+    <section class="container">
+        <div class="row">
+            <div><h4>Summer Reading Challenge Sign Up</h4></div>
             <div>
                 <form id="new_user_form" method="post" novalidate>
                     {% csrf_token %}
-                    <div>
-                        <div>Contact Information</div>
+                    <div class="col-sm-4">
                         <div>
                             {% if form_errors %}
                                 <div>
@@ -28,11 +39,12 @@
                                 </div>
                             {% endif %}
                             {{ form.as_p }}
-                            <p>{{ form.profile.phone.label }}:{{ form.profile.phone }}</p>
-                            <p>{{ form.profile.school.label }}:{{ form.profile.school }}</p>
-                            <p>{{ form.profile.next_grade.label }}:{{ form.profile.next_grade }}</p>
-                            <p>{{ form.profile.age.label }}:{{ form.profile.age }}</p>
-			    <button form="new_user_form" type="submit">Sign up</button>
+                            <p><strong>{{ form.profile.phone.label }}:</strong> {{ form.profile.phone }}</p>
+                            <p><strong>{{ form.profile.school.label }}:</strong> {{ form.profile.school }}</p>
+                            <p id="other_school" style="display: none"><strong>Other:</strong> {{ form.profile.other_school }}</p>
+                            <p><strong>Your Grade in September 2018:</strong> {{ form.profile.next_grade }}</p>
+                            <p><strong>{{ form.profile.age.label }}:</strong> {{ form.profile.age }}</p>
+    			            <button form="new_user_form" type="submit" class="btn btn-primary">Sign up</button>
                         </div>
                     </div>
                 </form>
@@ -40,5 +52,16 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         {{ form.media.js }}
+        </section>
+        <script>
+            $( "#{{ form.profile.school.id_for_label }}" ).change(function(){
+                var schools = document.getElementById("{{ form.profile.school.id_for_label }}");
+                if (schools.options[schools.selectedIndex].value == "Other"){
+                    $( "#other_school" ).show("fast");
+                } else {
+                    $( "#other_school" ).hide("fast");
+                };
+            });
+       </script> 
     </body>
 </HTML>

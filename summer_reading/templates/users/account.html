@@ -1,21 +1,32 @@
+{% load static %}
+{% load staticfiles %}
 <HTML>
     <head>
-        <title>
-	    User dashboard
-	</title>
+        <title>Summer Reading Challenge Account</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
-    <p align="right"><a href="{% url 'auth_logout' %}">Log Out</a></p>
-        <div>
-            <div><h4>Your reviews:</h4></div>
-            <div>
-                {% for review in reviews %}
-                    <p><a href="{% url 'review' review.id %}">{{ review.title }} by {{ review.author }}</a></p>
-                {% endfor %}
+        <header class="container">
+            <div class="col-sm-8"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+            <nav class="text-right">
+                <p class="col-sm-2" style="font-size: 20px;">Hi, {{ user.first_name }}!</p>
+                <p class="col-sm-1"><a href="{% url 'home-page' %}" class='btn btn-primary'>Home</a></p>
+                <p class="col-sm-1"><a href="{% url 'auth_logout' %}" class='btn btn-primary'>Log Out</a></p>
+            </nav>
+        </header>
+        <section class="container">
+            <div class="row">
+                <div id="add_review" class="col-sm-3"><a href="{% url 'add-review' %}" class='btn btn-success' style="font-size: 25px;">Add a new review</a></div>
             </div>
-            <div>
-                <p><a href="{% url 'add-review' %}">Add a new review</a></p>
+            <div id="account_reviews" class="row">
+                <table class="table table-striped">
+                    <thead><tr><td><h4>Your reviews:</h4></td></tr></thead>
+                    {% for review in reviews %}
+                        <tr><td><a href="{% url 'review' review.id %}">{{ review.title }} by {{ review.author }}</a></td></tr>
+                    {% endfor %}
+                </table>
             </div>
-        </div>
+        </section>
     </body>
 </head>

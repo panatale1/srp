@@ -7,8 +7,20 @@ from django.db import models
 
 
 class UserProfile(models.Model):
+    SCHOOL_CHOICES = (
+        ('Alexander Hamilton Junior/Senior High School', 'Alexander Hamilton Junior/Senior High School'),
+        ('Edgemont Junior/Senior High School', 'Edgemont Junior/Senior High School'),
+        ('Maria Regina High School', 'Maria Regina High School'),
+        ('R.J. Bailey School', 'R.J. Bailey School'),
+        ('Scarsdale Middle School', 'Scarsdale Middle School'),
+        ('Scarsdale High School', 'Scarsdale High School'),
+        ('Solomon Schechter School', 'Solomon Schechter School'),
+        ('Woodlands Middle/High School', 'Woodlands Middle/High School'),
+        ('Other', 'Other')
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    school = models.CharField(max_length=64, blank=True, null=True)
+    school = models.CharField(max_length=64, choices=SCHOOL_CHOICES, default='Alexander Hamliton Junior/Senior High School', blank=True)
+    other_school = models.CharField(max_length=64, blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     next_grade = models.CharField(max_length=7, blank=True, null=True)
     phone = PhoneNumberField(blank=True, null=True)
