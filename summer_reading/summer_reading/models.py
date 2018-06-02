@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from ckeditor.fields import RichTextField
 from phonenumber_field.modelfields import PhoneNumberField
 
 from django.contrib.auth.models import User
@@ -59,3 +60,13 @@ class Announcement(models.Model):
     @property
     def name(self):
         return '{0} {1}'.format(self.author.first_name, self.author.last_name)
+
+
+class Rules(models.Model):
+    content = RichTextField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return 'Rules created on {0}/{1}/{2}'.format(
+            self.created.month, self.created.day, self.created.year)

@@ -1,0 +1,11 @@
+<HTML>
+    <head>
+        <title>Summer Reading Challenge Announcements</title>
+    </head>
+    <body>
+        {{ results }}
+        {% for result in results %}
+            {{ result.content }}
+        {% endfor %}
+    </body>
+</HTML>

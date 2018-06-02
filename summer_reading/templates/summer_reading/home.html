@@ -25,19 +25,26 @@
             <div class="row text-center">
                     <h1>Your Summer Reading Challenge<br/>Starts Here!</h1>
             </div>
+            <div class="row" style="height:30px;"></div>
+            <div class="row" id="home-buttons">
+                {% if user.is_authenticated %}
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2 text-right"><a href="{% url 'add-review' %}" class="btn btn-success">Add a Review</a></div>
+                    <div class="col-sm-2 text-center"><a href="https://greenburghlibrary.libcal.com/calendar/Libraryevents/?cid=7925&t=d&d=0000-00-00&cal=7925&ct=35090" class="btn btn-success" target="_blank">Calendar</a></div>
+                    <div class="col-sm-2 text-left"><a href="#" class="btn btn-success" target="_blank">Events</a></div>
+                    <div class="col-sm-3"></div>
+                {% else %}
+                    <div class="col-sm-3 text-center"><a href="{% url 'user-registration' %}" class='btn btn-success'>Sign Up</a></div>
+                    <div class="col-sm-3 text-center"><a href="{% url 'auth_login' %}" class="btn btn-success">Log In</a></div>
+                    <div class="col-sm-3 text-center"><a href="https://greenburghlibrary.libcal.com/calendar/Libraryevents/?cid=7925&t=d&d=0000-00-00&cal=7925&ct=35090" class="btn btn-success" target="_blank">Calendar</a></div>
+                    <div class="col-sm-3 text-center"><a href="#" class="btn btn-success" target="_blank">Events</a></div>
+                {% endif %}
+            </div>
         </section>
         <section class="container">
             <div class="row">
                 <div id="rules" class="col-sm-4 text-left">
-                    <h3><strong>HOW TO PLAY:</strong></h3>
-                    <ol>
-                        <li><p><strong>Register</strong></p></li>
-                        <li><p>Read</p></li>
-                        <li><p>Write Reviews</p</li>
-                        <li><p>3 Or More Books</p></li>
-                        <li><p>Earn Raffle Tickets</p></li>
-                    </ol>
-                    <div class="text-center"><h3><strong>** WIN A TABLET **</strong></h3></div>
+                    {{ rules.content|safe }}
                 </div>
                 <div class="col-sm-1"></div>
                 <div id="announcements" class="col-sm-3 text-left">
@@ -57,7 +64,7 @@
                     {% for review in reviews %}
                         <p>{{ review.title }}<p>
                         <p>by {{ review.author }}</p>
-                        <p>{{ review.review }}</p>
+                        <p>{{ review.review|safe }}</p>
                         {% if not forloop.last %}
                             <hr/>
                         {% endif %}

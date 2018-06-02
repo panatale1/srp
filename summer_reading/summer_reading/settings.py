@@ -108,6 +108,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Format',],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Undo', 'Redo'],
+            ['Link', 'Unlink'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'JustifyLeft',
+             'JustifyCenter', 'JustifyRight'],
+            ['Source', 'RemoveFormat']
+        ]
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

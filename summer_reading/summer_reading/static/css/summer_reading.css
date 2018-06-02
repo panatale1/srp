@@ -1,10 +1,10 @@
 h1{
     //color: #16b21c;
-    font-family: Arial;
 }
 
 body {
     //background-color: #16b21c;
+    font-family: Arial;
 }
 
 header {
@@ -31,8 +31,14 @@ nav {
     background-color: #70A1EB;
     color: white;
 }
-jumbotron {
+#rules li{
+    font-size: 20px;
+}
+
+.jumbotron {
     padding: 10px;
+    background-color: #70A1EB;
+    color: white;
 }
 
 .errorlist {
@@ -53,3 +59,8 @@ jumbotron {
 thead {
     background-color: #70A1EB;
     color: white;
+}
+
+#home-buttons div a{
+    font-size: 25px;
+}

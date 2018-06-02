@@ -9,7 +9,8 @@ from django.http import Http404
 from django.views.generic import TemplateView, FormView, CreateView
 
 from .forms import SignUpForm, ReviewForm
-from .models import Review, User, Announcement
+from .mixins import PaginationMixin
+from .models import Review, User, Announcement, Rules
 
 
 class SelectWinnersView(TemplateView):
@@ -98,6 +99,44 @@ class HomeView(TemplateView):
         announcements = Announcement.objects.order_by('-created')
         if announcements.count() > 10:
             announcements = announcements[:10]
+        rules = Rules.objects.order_by('-modified').first()
         context = self.get_context_data(**kwargs)
-        context.update({'reviews': reviews, 'announcements': announcements})
+        context.update({'reviews': reviews, 'announcements': announcements, 'rules': rules})
         return self.render_to_response(context)
+
+
+class BrowseViewBase(PaginationMixin, TemplateView):
+    template_name = None
+
+    def set_browse_context(self, context, request, **kwargs):
+        self.results_per_page = 25
+        self.set_results()
+        (paginator, page) = self.build_page(self.results, self.results_per_page)
+        context.update({
+            'page': page,
+            'paginator': paginator,
+        })
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context = self.set_browse_context(context, request, **kwargs)
+        return self.render_to_response(context)
+
+
+class BrowseAnnouncements(BrowseViewBase):
+    template_name = 'summer_reading/browse_announcements.html'
+
+    def set_results(self):
+        self.results = Announcement.objects.order_by('-created', '-modified')
+
+    def get(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        return super(BrowseAnnouncements, self).get(request, *args, **kwargs)
+
+
+class BrowsePublicReviews(BrowseViewBase, TemplateView):
+    template_name = 'summer_reading/browse_public_reviews.html'
+
+    def set_results(self):
+        self.results = Reviews.object.filter(make_public=True).order_by('-created', '-modified')

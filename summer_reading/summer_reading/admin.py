@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from .models import UserProfile, Review, Announcement
+from .models import UserProfile, Review, Announcement, Rules
 
 
 @admin.register(Review)
@@ -17,6 +17,11 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(Announcement)
 class AnnouncementAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Rules)
+class RulesAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'modified')
 
 
 class UserProfileInline(admin.StackedInline):

@@ -1,14 +1,30 @@
+{% load static %}
+{% load staticfiles %}
 <HTML>
     <head>
-        <title>Review of {{ review.title }} from {{ user.first_name }} {{ user.last_name }}</title>
+        <title>Summer Reading Challenge Review of {{ review.title }} from {{ user.first_name }} {{ user.last_name }}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
-        <div><p align="right"><a href="{% url 'auth_logout' %}">Log Out</a></p></div>
-        <div>
-            <p>Title: {{ review.title }}</p>
-            <p>Author: {{ review.author }}<p>
-            <p>Review: {{ review.review }}</p>
-            <p>Is this review public: {% if review.make_public %} Yes {% else %} No {% endif %}</p>
-        </div>
+        <header class="container">
+            <div class="row">
+                <div class="col-sm-8"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+                <nav>
+                    <p class="col-sm-1 text-right">Hi, {{ user.first_name }}!</p>
+                    <p class="col-sm-2 text-center"><a href="{% url 'user-account' %}">My Account</a></p>
+                    <p class="col-sm-1 text-left"><a href="{% url 'auth_logout' %}">Log Out</a></p>
+                </nav>
+            </div>
+        </header>
+        <section class="container">
+            <div class="row" style="height: 30px;"></div>
+            <table class="table">
+                <thead><td colspan="2">Your review for {{ review.title }}</td></thead>
+                <tr><td >Author:</td><td>{{ review.author }}</td></tr>
+                <tr><td>Your review:</td><td>{{ review.review|safe }}</td></tr>
+                <tr><td>Is this review public:</td><td>{% if review.make_public %}Yes{% else %}No{% endif %}</td></tr>
+            </table>
+        </section>
     </body>
 </HTML>

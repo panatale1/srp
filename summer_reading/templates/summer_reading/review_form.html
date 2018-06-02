@@ -9,10 +9,11 @@
     <body>
         <header class="container">
             <div class="row">
-                <div class="col-sm-9"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
+                <div class="col-sm-8"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
                 <nav class="text-right">
-                    <p class="col-sm-1">Hi, {{ user.first_name }}!</p>
-                    <p class="col-sm-2 text-left"><a href="{% url 'user-account' %}">My Account</a></p>
+                    <p class="col-sm-1 text-right">Hi, {{ user.first_name }}!</p>
+                    <p class="col-sm-2 text-center"><a href="{% url 'user-account' %}">My Account</a></p>
+                    <p class="col-sm-1 text-left"><a href="{% url 'auth_logout' %}">Log Out</a></p>
                 </nav>
             </div>
         </header>

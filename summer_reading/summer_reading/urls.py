@@ -17,7 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from .views import (UserRegisterView, UserAccountView, CreateReview, ReviewView, HomeView)
+from .views import (
+    UserRegisterView, UserAccountView, CreateReview, ReviewView, HomeView, BrowseAnnouncements,
+    BrowsePublicReviews
+)
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home-page'),
@@ -28,4 +31,6 @@ urlpatterns = [
     url(r'^users/account/$', UserAccountView.as_view(), name='user-account'),
     url(r'^add_review', CreateReview.as_view(), name='add-review'),
     url(r'^users/review/(?P<review_id>\d+)/$', ReviewView.as_view(), name='review'),
+    url(r'^announcements', BrowseAnnouncements.as_view(), name='announcements'),
+    url(r'^reviews', BrowsePublicReviews.as_view(), name='public-reviews'),
 ]
