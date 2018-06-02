@@ -1,0 +1,23 @@
+<ul class="pagination pagination-sm pull-right">
+    {% if page.has_previous %}
+        <li class="pag-prev"><a href="{{ pagination_url }}{% if page.previous_number != 1 %}?page={{ page.previous_page_number }}{% endif %}"><i class="fa fa-angle-double-left"></i>Previous</a></li>
+    {% endif %}
+    {% if show_first %}
+        <li><a href="{{ pagination_url }}?page=1">1</a></li>
+        <li class="disabled ellipsis"><a>...</a></li>
+    {% endif %}
+    {% for number in page_numbers %}
+        {% if number == page.number %}
+            <li class="active"><a>{{ number }}</a></li>
+        {% else %}
+            <li><a href="{{ pagination_url }}?page={{ number }}">{{ number }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if show_last %}
+        <li class="disabled ellipsis"><a>...</a></li>
+        <li><a href="{{ pagination_url }}?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a></li>
+    {% endif %}
+    {% if page.has_next %}
+        <li class="pag-next"><a href="{{ pagination_url }}?page={{ page.next_page_number }}">Next<i class="fa fa-angle-double-right"></i></a></li>
+    {% endif %}
+</ul>

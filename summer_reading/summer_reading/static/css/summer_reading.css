@@ -12,7 +12,17 @@ header {
 }
 
 .btn-primary {
-    //background-color: #FFAF71;
+    background-color: #70A1EB;
+    border: 1px solid #70A1EB;
+}
+
+.panel-primary{
+     border: 1px solid #70A1EB;
+ }
+
+.panel-primary .panel-heading {
+    background-color: #70A1EB;
+    border: 1px solid #70A1EB;
 }
 
 nav {
@@ -63,4 +73,9 @@ thead {
 
 #home-buttons div a{
     font-size: 25px;
+}
+
+.active {
+    background-color: #70A1EB;
+    color: white;
 }

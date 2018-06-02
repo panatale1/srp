@@ -130,13 +130,9 @@ class BrowseAnnouncements(BrowseViewBase):
     def set_results(self):
         self.results = Announcement.objects.order_by('-created', '-modified')
 
-    def get(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
-        return super(BrowseAnnouncements, self).get(request, *args, **kwargs)
-
 
 class BrowsePublicReviews(BrowseViewBase, TemplateView):
     template_name = 'summer_reading/browse_public_reviews.html'
 
     def set_results(self):
-        self.results = Reviews.object.filter(make_public=True).order_by('-created', '-modified')
+        self.results = Review.objects.filter(make_public=True).order_by('-created', '-modified')

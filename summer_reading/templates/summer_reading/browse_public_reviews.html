@@ -12,8 +12,8 @@
                     <div class="col-sm-8"><img src="{% static 'summer_reading/gpl_logo.jpg' %}"/></div>
                 <nav>
                     {% if user.is_authenticated %}
-                        <p class="col-sm-1 text-right">Hi, {{ user.first_name }}!</p>
                         <p class="col-sm-1 text-right"><a href="{% url 'home-page' %}">Home</a></p>
+                        <p class="col-sm-1 text-right">Hi, {{ user.first_name }}!</p>
                         <p class="col-sm-2 text-right"><a href="{% url 'user-account' %}">My Account</a> | <a href="{% url 'auth_logout' %}">Log Out</a></p>
                     {% else %}
                         <p class="col-sm-1"></p>
@@ -32,10 +32,10 @@
                 {% for object in page.object_list %}
                     <div class="panel panel-primary">
                         <div class="panel panel-heading">
-                            <h4>{{ object.title }}</h4>
-                            <p class="caption">Posted by {{ object.author.first_name }} {{ object.author.last_name }} on {{ object.created|date:'F d, Y' }}</p>
+                            <h4>Review of {{ object.title }}</h4>
+                            <p class="caption">By {{ object.author }}</p>
                         </div>
-                        <div class="panel panel-body"><p>{{ object.announcement|safe|truncatewords_html:200 }}</p></div>
+                        <div class="panel panel-body"><p>{{ object.review|safe }}</p></div>
                     </div>
                 {% endfor %}
             </div>
