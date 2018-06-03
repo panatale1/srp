@@ -89,6 +89,35 @@ class ReviewView(LoginRequiredMixin, TemplateView):
         return self.render_to_response(context)
 
 
+class PublicReviewView(TemplateView):
+    template_name = 'summer_reading/public_review.html'
+
+    def get(self, request, *args, **kwargs):
+        review_id = kwargs.pop('review_id')
+        try:
+            review = Review.objects.get(pk=review_id)
+        except Review.DoesNotExist:
+            raise Http404
+        context = self.get_context_data(**kwargs)
+        context.update({'review': review})
+        return self.render_to_response(context)
+
+
+class AnnouncementView(TemplateView):
+    template_name = 'summer_reading/announcement.html'
+
+    def get(self, request, *args, **kwargs):
+        announcement_id = kwargs.pop('announcement_id')
+        try:
+            announcement = Announcement.objects.get(pk=announcement_id)
+        except Announcement.DoesNotExist:
+            raise Http404
+        context = self.get_context_data(**kwargs)
+        context.update({'announcement': announcement})
+        return self.render_to_response(context)
+
+
+
 class HomeView(TemplateView):
     template_name = 'summer_reading/home.html'
 

@@ -32,10 +32,10 @@
                 {% for object in page.object_list %}
                     <div class="panel panel-primary">
                         <div class="panel panel-heading">
-                            <h4>Review of {{ object.title }}</h4>
+                                <h4><a href="{% url 'public-review' object.id %}">Review of {{ object.title }}</a></h4>
                             <p class="caption">By {{ object.author }}</p>
                         </div>
-                        <div class="panel panel-body"><p>{{ object.review|safe }}</p></div>
+                        <div class="panel panel-body">{{ object.review|safe|truncatewords:200 }}{% if object.review|safe|wordcount > 200 %}<a href="{% url 'public-review' object.id %}"> Read More</a>{% endif %}</div>
                     </div>
                 {% endfor %}
             </div>

@@ -25,6 +25,9 @@ header {
     border: 1px solid #70A1EB;
 }
 
+.panel-primary .panel-heading h4 a {
+    color: white;
+}
 nav {
     padding-top: 25px;
 }

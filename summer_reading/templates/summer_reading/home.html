@@ -48,28 +48,32 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div id="announcements" class="col-sm-3 text-left">
-                    <h3>Recent Announcements:</h4>
+                    <h3>Recent Announcements:</h3>
+                    <hr/>
                     {% for announcement in announcements %}
-                        <h4>{{ announcement.title }}</h4>
+                        <h4><a href="{% url 'announcement' announcement.id %}">{{ announcement.title }}</a></h4>
                         <p>posted by {{ announcement.name }}</p>
-                        <p>{{ announcement.announcement|safe }}</p>
+                        {{ announcement.announcement|safe|truncatewords:30 }} {% if announcement.announcement|safe|wordcount > 30 %}<a href="{% url 'announcement' announcement.id %}">Read more</a>{% endif %}
                         {% if not forloop.last %}
                             <hr/>
                         {% endif %}
                     {% endfor %}
-                    <p class="pull-right"><a href="{% url 'announcements' %}">More announcements<i class="fa fa-angle-double-right"></i></a></p>
+                    <hr/>
+                    <p class="pull-right"><a href="{% url 'announcements' %}">All announcements<i class="fa fa-angle-double-right"></i></a></p>
                 </div>
                 <div class="col-sm-1"></div>
                 <div id="homepage_reviews" class="col-sm-3 text-left">
                     <h3>Recent Reviews:</h3>
+                    <hr/>
                     {% for review in reviews %}
-                        <p>{{ review.title }}<p>
+                        <p><a href="{% url 'public-review' review.id %}">{{ review.title }}</a><p>
                         <p>by {{ review.author }}</p>
-                        <p>{{ review.review|safe }}</p>
+                        {{ review.review|safe|truncatewords:30 }} {% if review.review|safe|wordcount > 30 %}<a href="{% url 'public-review' review.id %}">Read more</a>{% endif %}
                         {% if not forloop.last %}
                             <hr/>
                         {% endif %}
                     {% endfor %}
+                    <hr/>
                     <p class="pull-right"><a href="{% url 'public-reviews' %}">More reviews<i class="fa fa-angle-double-right"></i></a></p>
                 </div>
             </div>
