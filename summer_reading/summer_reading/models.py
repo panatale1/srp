@@ -67,6 +67,9 @@ class Rules(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'Rules'
+
     def __unicode__(self):
         return 'Rules created on {0}/{1}/{2}'.format(
             self.created.month, self.created.day, self.created.year)

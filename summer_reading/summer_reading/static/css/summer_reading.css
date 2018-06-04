@@ -48,6 +48,10 @@ nav {
     font-size: 20px;
 }
 
+#rules li a {
+    color: white;
+}
+
 .jumbotron {
     padding: 10px;
     background-color: #70A1EB;

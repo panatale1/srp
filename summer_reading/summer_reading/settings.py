@@ -113,7 +113,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': [
             ['Format',],
             ['Bold', 'Italic', 'Underline', 'Strike', 'Undo', 'Redo'],
-            ['Link', 'Unlink'],
+            ['Link', 'Unlink', 'Image'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'JustifyLeft',
              'JustifyCenter', 'JustifyRight'],
             ['Source', 'RemoveFormat']
