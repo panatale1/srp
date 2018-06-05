@@ -4,6 +4,7 @@
     <head>
         <title>Summer Reading Challenge Announcements</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static 'css/summer_reading.css' %}">
     </head>
     <body>
@@ -35,7 +36,7 @@
                                 <h4><a href="{% url 'public-review' object.id %}">Review of {{ object.title }}</a></h4>
                             <p class="caption">By {{ object.author }}</p>
                         </div>
-                        <div class="panel panel-body">{{ object.review|safe|truncatewords:200 }}{% if object.review|safe|wordcount > 200 %}<a href="{% url 'public-review' object.id %}"> Read More</a>{% endif %}</div>
+                        <div class="panel panel-body">{{ object.review|safe|truncatewords:200 }}{% if object.review|safe|wordcount > 200 %} <a href="{% url 'public-review' object.id %}">Read More <i class="fa fa-angle-right"></i></a>{% endif %}</div>
                     </div>
                 {% endfor %}
             </div>

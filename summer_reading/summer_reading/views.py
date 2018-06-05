@@ -130,7 +130,12 @@ class HomeView(TemplateView):
             announcements = announcements[:10]
         rules = Rules.objects.order_by('-modified').first()
         context = self.get_context_data(**kwargs)
-        context.update({'reviews': reviews, 'announcements': announcements, 'rules': rules})
+        context.update({
+            'reviews': reviews,
+            'announcements': announcements,
+            'rules': rules,
+            'STATIC_URL': settings.STATIC_URL,
+        })
         return self.render_to_response(context)
 
 
