@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from datetime import datetime
 
 from ckeditor.widgets import CKEditorWidget
 import django_superform
@@ -7,6 +8,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import  PhoneNumberPrefixWidget
 
 from django import forms
+from django.forms.utils import ErrorList
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -41,15 +43,27 @@ class UserProfileForm(forms.ModelForm):
         ('12', '12'),
         ('College', 'College'),
     )
-    age = forms.IntegerField()
-    phone = forms.CharField(widget=IntlTelInputWidget(allow_dropdown=False))
-    next_grade = forms.ChoiceField(choices=GRADE_CHOICES, initial='6')
-    other_school = forms.CharField(required=False)
+    age = forms.IntegerField(
+        error_messages={'required': 'Age is a required field'})
+    phone = forms.CharField(widget=IntlTelInputWidget(allow_dropdown=False),
+                            error_messages={
+                                'required': 'Phone number is a required field'},
+                            label='Phone number')
+    next_grade = forms.ChoiceField(
+        choices=GRADE_CHOICES, initial='6',
+        label='Your grade in September {}'.format(datetime.now().year),
+        error_messages={'required': 'Your grade is required'}
+    )
+    other_school = forms.CharField(
+        required=False, 
+        error_messages={'required': 'Please enter a name for your school'},
+        label='School name'
+    )
 
     class Meta:
         model = UserProfile
-        fields = ['school', 'age', 'phone', 'next_grade', 'other_school']
-     
+        fields = ['phone', 'school', 'other_school', 'next_grade', 'age']
+
 
 class UserProfileField(django_superform.ModelFormField):
 
@@ -73,10 +87,17 @@ class UserProfileField(django_superform.ModelFormField):
 
 
 class SignUpForm(django_superform.SuperModelForm):
-    username = forms.CharField(max_length=50)
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
-    email = forms.EmailField()
+    username = forms.CharField(
+        max_length=50, error_messages={
+            'required': 'Username is a required field'})
+    first_name = forms.CharField(
+        max_length=50, error_messages={
+            'required': 'First name is a required field'})
+    last_name = forms.CharField(
+        max_length=50, error_messages={
+            'required': 'Last name is a required field'})
+    email = forms.EmailField(error_messages={
+        'required': 'Email is a required field'})
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', 'max_length': '50'}),
@@ -109,4 +130,6 @@ class SignUpForm(django_superform.SuperModelForm):
             }
             for field, msg in errs:
                 self.add_error(field, ValidationError(msg, code))
+        if self.data['profile-school'].lower() == 'other' and not self.data['profile-other_school']:
+            self.forms['profile'].fields['other_school'].required = True
         return data

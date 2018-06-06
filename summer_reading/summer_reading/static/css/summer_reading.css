@@ -54,9 +54,8 @@ nav {
 }
 
 .errorlist {
-    padding: 20px;
     background-color: #f44336;
-    margin-bottom: 15px;
+    padding: 5px;
     color: white;
 }
 

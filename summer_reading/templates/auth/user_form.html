@@ -23,27 +23,90 @@
             <div>
                 <form id="new_user_form" method="post" novalidate>
                     {% csrf_token %}
-                    <div class="col-sm-4">
                         <div>
-                            {% if form_errors %}
-                                <div>
-                                    <div>
-                                        <div>
-                                            <ul>
-                                                {% for field, errors in form_errors %}
-                                                    <li><strong>{{ field }}</strong>{% for error in errors %} - {{ error }}{% endfor %}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                            {{ form.as_p }}
-                            <p><strong>{{ form.profile.phone.label }}:</strong> {{ form.profile.phone }}</p>
-                            <p><strong>{{ form.profile.school.label }}:</strong> {{ form.profile.school }}</p>
-                            <p id="other_school" style="display: none"><strong>Other:</strong> {{ form.profile.other_school }}</p>
-                            <p><strong>Your Grade in September 2018:</strong> {{ form.profile.next_grade }}</p>
-                            <p><strong>{{ form.profile.age.label }}:</strong> {{ form.profile.age }}</p>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.first_name.label }}:</strong><br/> {{ form.first_name }}</p>
+                                {% if form.errors.first_name %}
+                                    {% with form.errors.first_name as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.last_name.label }}:</strong><br> {{ form.last_name }}</p>
+                                {% if form.errors.last_name %}
+                                    {% with form.errors.last_name as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.email.label }}:</strong><br/> {{ form.email }}</p>
+                                {% if form.errors.email %}
+                                    {% with form.errors.email as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.username.label }}:</strong><br/> {{ form.username }}</p>
+                                {% if form.errors.username %}
+                                    {% with form.errors.username as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.password.label }}:</strong><br/> {{ form.password }}</p>
+                                {% if form.errors.password %}
+                                    {% with form.errors.password as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.password_confirm.label }}:</strong><br/> {{ form.password_confirm }}</p>
+                                {% if form.errors.password_confirm %}
+                                    {% with form.errors.password_confirm as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>Your Grade in September 2018:</strong><br/> {{ form.profile.next_grade }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.profile.age.label }}:</strong><br/> {{ form.profile.age }}</p>
+                                {% if form.forms.profile.errors.age %}
+                                    {% with form.forms.profile.errors.age as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.profile.school.label }}:</strong><br/> {{ form.profile.school }}</p>
+                                {% if form.forms.profile.errors.school %}
+                                    {% with form.forms.profile.errors.school as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row" id="other_school">
+                                <p class="col-sm-3"><strong>School Name:</strong><br> {{ form.profile.other_school }}</p>
+                                {% if form.forms.profile.errors.other_school %}
+                                    {% with form.forms.profile.errors.other_school as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <p class="col-sm-3"><strong>{{ form.profile.phone.label }}:</strong><br/> {{ form.profile.phone }}</p>
+                                {% if form.forms.profile.errors.phone %}
+                                    {% with form.forms.profile.errors.phone as field %}
+                                        {% include 'summer_reading/includes/errorlist.html' %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
     			            <button form="new_user_form" type="submit" class="btn btn-primary">Sign up</button>
                         </div>
                     </div>
@@ -54,6 +117,14 @@
         {{ form.media.js }}
         </section>
         <script>
+            $( "#{{ form.profile.school.id_for_label }}" ).ready(function(){
+                var schools = document.getElementById("{{ form.profile.school.id_for_label }}");
+                if (schools.options[schools.selectedIndex].value == "Other"){
+                    document.getElementById("other_school").style.display = "inline";
+                } else {
+                    document.getElementById("other_school").style.display = "none";
+                };
+            });
             $( "#{{ form.profile.school.id_for_label }}" ).change(function(){
                 var schools = document.getElementById("{{ form.profile.school.id_for_label }}");
                 if (schools.options[schools.selectedIndex].value == "Other"){
