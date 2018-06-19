@@ -1,0 +1,25 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Summer Reading Challenge Draw Winners {% endblock title %}
+
+{% block extrastyle %}
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap3.3.6/css/boostrap.min.css'>
+{% endblock extrastyle %}
+
+{% block content %}
+        <div class="panel panel-primary" style="width:50%;">
+            <div class="panel panel-heading" style="color:#79aec8;">
+                <h2>Entry Count</h2>
+            </div>
+            <div class="panel panel-body">
+                    <p>There are {{ entry_count }} entr{{ entry_count|pluralize:'y,ies' }} from {{ user_count }} user{{ user_count|pluralize }}.</p>
+                    <p>
+                        <form method="POST" action="{% url 'draw-winners' %}">{% csrf_token %}
+                            <input type="submit" class="btn btn-primary" value="Click to draw winners">
+                        </form>
+                    </p>
+            </div>
+        </div>
+{% endblock content %}

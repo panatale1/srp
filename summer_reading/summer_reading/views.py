@@ -21,9 +21,27 @@ class SelectWinnersView(TemplateView):
         users = list(Review.objects.values_list('user', flat=True))
         for dummy in range(10):
             shuffle(users)
-        winner = choice(users)
+        winners = set()
+        while len(winners) < 5 and len(winners) < len(set(users)):
+            winners.add(choice(users))
+        winning_users = User.objects.filter(id__in=list(winners))
         context = self.get_context_data(**kwargs)
-        context.update({'winner': winner})
+        context.update({'winners': winning_users})
+        return self.render_to_response(context)
+
+
+class ShowEntriesView(TemplateView):
+    login_url = '/admin/login/'
+    template_name = 'admin/show-entries.html'
+
+    def get(self, request, *args, **kwargs):
+        entry_count = Review.objects.count()
+        user_count = User.objects.exclude(is_superuser=True).count()
+        context = self.get_context_data(**kwargs)
+        context.update({
+            'entry_count': entry_count,
+            'user_count': user_count
+        })
         return self.render_to_response(context)
 
 
