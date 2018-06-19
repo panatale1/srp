@@ -25,7 +25,7 @@ SECRET_KEY = '^oo*r-u0w8y=e8u$!q_jiu_1xt_lszo7i$lgf7#3^gk6730rsh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = ['www.greenburghsummerreading.org', '18.217.149.211']
+# ALLOWED_HOSTS = ['www.greenburghsummerreading.org', '18.217.149.211']
 
 
 # Application definition
@@ -83,9 +83,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_reading_2',
-        'USER': 'GPLSummer',
-        'PASSWORD': 'gakgaksummer',
-        'HOST': 'gpl-summer-reading.csvg53yg7pwn.us-east-2.rds.amazonaws.com',
+        'USER': 'python',
+        'PASSWORD': 'Python',
+        'HOST': 'localhost',
 	'PORT': '',
     }
 }
