@@ -62,6 +62,8 @@
                                     {% with form.errors.password as field %}
                                         {% include 'summer_reading/includes/errorlist.html' %}
                                     {% endwith %}
+                                {% else %}
+                                    <p class="col-sm-3" style="padding-top:1em;"><caption>Password must contain at least 8 characters</caption></p>
                                 {% endif %}
                             </div>
                             <div class="row">
@@ -70,6 +72,8 @@
                                     {% with form.errors.password_confirm as field %}
                                         {% include 'summer_reading/includes/errorlist.html' %}
                                     {% endwith %}
+                                {% else %}
+                                    <p class="col-sm-3" style="padding-top:1em;"><caption>Must match password</caption></p>
                                 {% endif %}
                             </div>
                             <div class="row">
