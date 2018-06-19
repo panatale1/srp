@@ -1,8 +1,8 @@
 #!/bin/bash
 
-NAME="timeclock"
-DJANGODIR=/home/peter/repos/srp/summer_reading
-SOCKFILE=/home/peter/repos/srp/run/gunicorn.sock
+NAME="summer_reading"
+DJANGODIR=/home/ubuntu/repos/srp/summer_reading
+SOCKFILE=/home/ubuntu/repos/srp/run/gunicorn.sock
 NUM_WORKERS=3
 DJANGO_SETTINGS_MODULE=summer_reading.settings
 DJANGO_WSGI_MODULE=summer_reading.wsgi

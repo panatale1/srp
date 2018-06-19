@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^oo*r-u0w8y=e8u$!q_jiu_1xt_lszo7i$lgf7#3^gk6730rsh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True 
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['www.greenburghsummerreading.org', '18.217.149.211']
 
 
 # Application definition
@@ -83,9 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'summer_reading_2',
-        'USER': 'python',
-        'PASSWORD': 'Python',
-        'HOST': 'localhost'
+        'USER': 'GPLSummer',
+        'PASSWORD': 'gakgaksummer',
+        'HOST': 'gpl-summer-reading.csvg53yg7pwn.us-east-2.rds.amazonaws.com',
+	'PORT': '',
     }
 }
 
@@ -139,6 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '{}/static/'.format(BASE_DIR)
+STATIC_ROOT = '{}/summer_reading/static/'.format(BASE_DIR)
 LOGIN_REDIRECT_URL = '/users/account/'
 LOGOUT_REDIRECT_URL = '/users/login/'
+
+APPEND_SLASH = True

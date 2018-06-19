@@ -44,9 +44,11 @@
         </section>
         <section class="container">
             <div class="row">
+		{% if rules %}
                 <div id="rules" class="col-sm-4 text-left">
                     {{ rules.content|safe }}
                 </div>
+		{% endif %}
                 <div class="col-sm-1"></div>
                 {% if announcements %}
                     <div id="announcements" class="col-sm-3 text-left">
