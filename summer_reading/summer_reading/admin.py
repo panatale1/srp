@@ -29,8 +29,14 @@ class UserProfileInline(admin.StackedInline):
     can_delete = False
 
 
+class ReviewInline(admin.StackedInline):
+    model = Review
+    can_delete = False
+    extra = 1
+
+
 class UserAdmin(BaseUserAdmin):
-    inlines = (UserProfileInline,)
+    inlines = (UserProfileInline, ReviewInline,)
 
 
 admin.site.unregister(User)
