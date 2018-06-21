@@ -29,16 +29,20 @@
             <div class="row" style="height:30px;"></div>
             <div class="row" id="home-buttons">
                 {% if user.is_authenticated %}
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-2 text-right"><a href="{% url 'add-review' %}" class="btn btn-success">Add a Review</a></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2 text-center"><a href="{% url 'add-review' %}" class="btn btn-success">Add a Review</a></div>
+                    <div class="col-sm-2"><a href="http://greenburghlibrary.org/teen#lists" class="btn btn-success" target="_blank">Reading Lists</a></div>
                     <div class="col-sm-2 text-center"><a href="https://greenburghlibrary.libcal.com/calendar/Libraryevents/?cid=7925&t=d&d=0000-00-00&cal=7925&ct=35090" class="btn btn-success" target="_blank">Calendar</a></div>
-                    <div class="col-sm-2 text-left"><a href="{% static 'summer_reading/2018_events.pdf' %}" class="btn btn-success" target="_blank">Events</a></div>
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2 text-center"><a href="{% static 'summer_reading/2018_events.pdf' %}" class="btn btn-success" target="_blank">Events</a></div>
+                    <div class="col-sm-2"></div>
                 {% else %}
-                    <div class="col-sm-3 text-center"><a href="{% url 'user-registration' %}" class='btn btn-success'>Sign Up</a></div>
-                    <div class="col-sm-3 text-center"><a href="{% url 'auth_login' %}" class="btn btn-success">Log In</a></div>
-                    <div class="col-sm-3 text-center"><a href="https://greenburghlibrary.libcal.com/calendar/Libraryevents/?cid=7925&t=d&d=0000-00-00&cal=7925&ct=35090" class="btn btn-success" target="_blank">Calendar</a></div>
-                    <div class="col-sm-3 text-center"><a href="{% static 'summer_reading/2018_events.pdf' %}" class="btn btn-success" target="_blank">Events</a></div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2 text-center"><a href="{% url 'user-registration' %}" class='btn btn-success'>Sign Up</a></div>
+                    <div class="col-sm-2 text-center"><a href="{% url 'auth_login' %}" class="btn btn-success">Log In</a></div>
+                    <div class="col-sm-2 text-center"><a href="http://greenburghlibrary.org/teen#lists" class="btn btn-success" target="_blank">Reading Lists</a></div>
+                    <div class="col-sm-2 text-center"><a href="https://greenburghlibrary.libcal.com/calendar/Libraryevents/?cid=7925&t=d&d=0000-00-00&cal=7925&ct=35090" class="btn btn-success" target="_blank">Calendar</a></div>
+                    <div class="col-sm-2 text-center"><a href="{% static 'summer_reading/2018_events.pdf' %}" class="btn btn-success" target="_blank">Events</a></div>
+                    <div class="col-sm-1"></div>
                 {% endif %}
             </div>
         </section>
