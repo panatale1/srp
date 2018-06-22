@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
+from .forms import ReviewAdminForm
 from .models import UserProfile, Review, Announcement, Rules
 
 
@@ -12,6 +13,7 @@ class ReviewAdmin(admin.ModelAdmin):
     list_filter = ('make_public', 'user')
     search_fields = ['^user__first_name', '^user__last_name']
     raw_id_fields = ['user']
+    form = ReviewAdminForm
 
 
 @admin.register(Announcement)
@@ -33,6 +35,7 @@ class ReviewInline(admin.StackedInline):
     model = Review
     can_delete = False
     extra = 1
+    form = ReviewAdminForm
 
 
 class UserAdmin(BaseUserAdmin):

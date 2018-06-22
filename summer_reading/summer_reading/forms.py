@@ -32,6 +32,16 @@ class ReviewForm(forms.ModelForm):
         super(ReviewForm, self).__init__(*args, **kwargs)
 
 
+class ReviewAdminForm(forms.ModelForm):
+    review = forms.CharField(widget=CKEditorWidget())
+    make_public = forms.BooleanField(
+        widget=forms.CheckboxInput())
+
+    class Meta:
+        model = Review
+        fields = ['title', 'author', 'review', 'make_public', 'user']
+
+
 class UserProfileForm(forms.ModelForm):
     GRADE_CHOICES = (
         ('6', '6'),
