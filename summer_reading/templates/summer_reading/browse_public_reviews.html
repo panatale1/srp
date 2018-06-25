@@ -36,7 +36,7 @@
                                 <h4><a href="{% url 'public-review' object.id %}">Review of {{ object.title }}</a></h4>
                             <p class="caption">By {{ object.author }}</p>
                         </div>
-                        <div class="panel panel-body">{{ object.review|safe|truncatewords:200 }}{% if object.review|safe|wordcount > 200 %} <a href="{% url 'public-review' object.id %}">Read More <i class="fa fa-angle-right"></i></a>{% endif %}</div>
+                        <div class="panel panel-body">{{ object.review|safe|truncatewords_html:200 }}{% if object.review|safe|wordcount > 200 %} <a href="{% url 'public-review' object.id %}">Read More <i class="fa fa-angle-right"></i></a>{% endif %}</div>
                     </div>
                 {% endfor %}
             </div>

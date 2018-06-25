@@ -64,7 +64,7 @@
                                 {% for announcement in announcements %}
                                     <h4><a href="{% url 'announcement' announcement.id %}">{{ announcement.title }}</a></h4>
                                     <p>posted by {{ announcement.name }}</p>
-                                    {{ announcement.announcement|safe|truncatewords:30 }} {% if announcement.announcement|safe|wordcount > 30 %}<a href="{% url 'announcement' announcement.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}
+                                    {{ announcement.announcement|safe|truncatewords_html:30 }} {% if announcement.announcement|safe|wordcount > 30 %}<a href="{% url 'announcement' announcement.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}
                                     {% if not forloop.last %}
                                         <hr/>
                                     {% endif %}
@@ -87,7 +87,7 @@
                             {% for review in reviews %}
                                 <h4><a href="{% url 'public-review' review.id %}">{{ review.title }}</a></h4>
                                 <p>by {{ review.author }}</p>
-                                {{ review.review|safe|truncatewords:30 }} {% if review.review|safe|wordcount > 30 %}<a href="{% url 'public-review' review.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}
+                                {{ review.review|safe|truncatewords_html:30 }} {% if review.review|safe|wordcount > 30 %}<a href="{% url 'public-review' review.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}
                                 {% if not forloop.last %}
                                     <hr/>
                                 {% endif %}

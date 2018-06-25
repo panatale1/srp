@@ -36,7 +36,7 @@
                                 <h4><a href="{% url 'announcement' object.id %}">{{ object.title }}</a></h4>
                             <p class="caption">Posted by {{ object.author.first_name }} {{ object.author.last_name }} on {{ object.created|date:'F d, Y' }}</p>
                         </div>
-                        <div class="panel panel-body">{{ object.announcement|safe|truncatewords:200 }}{% if object.announcement|safe|wordcount > 200 %} <a href="{% url 'announcement' object.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}</div>
+                        <div class="panel panel-body">{{ object.announcement|safe|truncatewords_html:200 }}{% if object.announcement|safe|wordcount > 200 %} <a href="{% url 'announcement' object.id %}">Read more <i class="fa fa-angle-right"></i></a>{% endif %}</div>
                     </div>
                 {% endfor %}
             </div>
